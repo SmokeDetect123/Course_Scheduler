@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Course Selection | Institute</title>
+    <link rel="stylesheet" href="teacher.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <h1>Institute Name</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Departments</a>
+            <a href="#">Courses</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h2>Welcome, <span id="teacher-name">John Doe</span></h2>
+            <p>Department: <span id="teacher-department">Computer Science</span></p>
+        </div>
+
+        <div class="course-selection">
+            <label for="year-select">Select Year:</label>
+            <select id="year-select" onchange="filterCourses()">
+                <option value="">--Select Year--</option>
+                <option value="1">First Year</option>
+                <option value="2">Second Year</option>
+                <option value="3">Third Year</option>
+                <option value="4">Fourth Year</option>
+            </select>
+        </div>
+
+        <div class="courses">
+            <h3>Select Courses to Teach</h3>
+            <form id="course-form">
+                <ul id="course-list">
+                    <!-- Courses will be displayed here -->
+                </ul>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+
+        <div class="allotted-courses">
+            <h3>Allotted Courses</h3>
+            <div class="course-buttons">
+                <button id="view-allotted-courses-btn">View Allotted Courses</button>
+                <button id="close-allotted-courses-btn" style="display:none;">Close</button>
+            </div>
+            <table id="allotted-course-table" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
+                        <th>Credits</th>
+                    </tr>
+                </thead>
+                <tbody id="allotted-course-body">
+                    <tr>
+                        <td colspan="3">No courses allotted yet.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>                                
+
+        <!-- Existing allotted courses section -->
+        <div class="allotted-courses">
+            <h3>Schedule</h3>
+            <ul id="allotted-course-list"></ul>
+            
+            <!-- Button to view schedule -->
+            <button id="view-schedule-btn">View Schedule</button>
+            <button id="close-schedule-btn" style="display: none;">Close Schedule</button>
+
+            <!-- Schedule section -->
+            <div id="schedule-section" style="display: none; margin-top: 20px;">
+                <h3>Your Schedule</h3>
+                <table id="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Time</th>
+                            <th>Course</th>
+                            <th>Room</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schedule-body">
+                        <!-- Schedule will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Institute Name. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const courses = {
+            "Computer Science": {
+                1: ["Introduction to CS", "Basic Programming"],
+                2: ["Data Structures", "Algorithms"],
+                3: ["Operating Systems", "Computer Networks"],
+                4: ["Artificial Intelligence", "Machine Learning"]
+            }
+        };
+    
+        // Initialize with dummy data for allotted courses
+        const allottedCourses = [
+            { courseName: 'Introduction to Programming', courseCode: 'CS101', credits: 3 },
+            { courseName: 'Data Structures', courseCode: 'CS102', credits: 3 },
+            { courseName: 'Web Development', courseCode: 'CS103', credits: 4 }
+        ];
+    
+        // Sample schedule data
+        const scheduleData = [
+            { day: "Monday", time: "9:00 AM - 10:30 AM", course: "Data Structures", room: "Room 101" },
+            { day: "Tuesday", time: "11:00 AM - 12:30 PM", course: "Algorithms", room: "Room 102" },
+            { day: "Wednesday", time: "1:00 PM - 2:30 PM", course: "Artificial Intelligence", room: "Room 103" },
+            { day: "Thursday", time: "3:00 PM - 4:30 PM", course: "Operating Systems", room: "Room 104" },
+            { day: "Friday", time: "10:00 AM - 11:30 AM", course: "Computer Networks", room: "Room 105" },
+        ];
+    
+        document.getElementById('view-schedule-btn').addEventListener('click', function() {
+            const scheduleSection = document.getElementById('schedule-section');
+            const scheduleBody = document.getElementById('schedule-body');
+            const closeButton = document.getElementById('close-schedule-btn');
+    
+            // Clear previous schedule
+            scheduleBody.innerHTML = '';
+    
+            // Populate the schedule table
+            scheduleData.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${entry.day}</td><td>${entry.time}</td><td>${entry.course}</td><td>${entry.room}</td>`;
+                scheduleBody.appendChild(row);
+            });
+    
+            // Show the schedule section and the close button
+            scheduleSection.style.display = 'block';
+            closeButton.style.display = 'inline-block';
+            this.style.display = 'none'; // Hide the view schedule button
+        });
+    
+        document.getElementById('close-schedule-btn').addEventListener('click', function() {
+            const scheduleSection = document.getElementById('schedule-section');
+            const viewButton = document.getElementById('view-schedule-btn');
+    
+            // Hide the schedule section and the close button
+            scheduleSection.style.display = 'none';
+            this.style.display = 'none'; // Hide the close button
+            viewButton.style.display = 'inline-block'; // Show the view schedule button
+        });
+    
+        // Filter Courses Functionality
+        function filterCourses() {
+            const year = document.getElementById('year-select').value;
+            const courseList = document.getElementById('course-list');
+            const department = document.getElementById('teacher-department').textContent;
+    
+            // Clear previous course list
+            courseList.innerHTML = '';
+    
+            if (year && courses[department][year]) {
+                courses[department][year].forEach(course => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<input type="checkbox" name="courses" value="${course}"> ${course}`;
+                    courseList.appendChild(li);
+                });
+            }
+        }
+    
+        document.getElementById('course-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const selectedCourses = [];
+            const checkboxes = document.querySelectorAll('input[name="courses"]:checked');
+            checkboxes.forEach(checkbox => {
+                selectedCourses.push(checkbox.value);
+            });
+    
+            if (selectedCourses.length > 0) {
+                allottedCourses = selectedCourses;
+            }
+    
+            updateAllottedCourses();
+        });
+    
+        function updateAllottedCourses() {
+            const allottedCourseBody = document.getElementById('allotted-course-body'); // Match table structure
+            allottedCourseBody.innerHTML = ''; // Clear existing list
+    
+            if (allottedCourses.length > 0) {
+                allottedCourses.forEach(course => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${course.courseName}</td><td>${course.courseCode}</td><td>${course.credits}</td>`; // Match table format
+                    allottedCourseBody.appendChild(row);
+                });
+            } else {
+                const row = document.createElement('tr');
+                row.innerHTML = '<td colspan="3">No courses allotted yet.</td>'; // Adjust for table
+                row.classList.add('no-courses'); // Add a class for styling
+                allottedCourseBody.appendChild(row);
+            }
+        }
+    
+        // Initialize with dummy data for allotted courses
+        updateAllottedCourses();
+    
+        // New functionality for allotted courses section
+        document.getElementById('view-allotted-courses-btn').addEventListener('click', function() {
+            const allottedCourseTable = document.getElementById('allotted-course-table');
+            const closeButton = document.getElementById('close-allotted-courses-btn');
+    
+            // Show the allotted courses table and hide the view button
+            allottedCourseTable.style.display = 'table';
+            closeButton.style.display = 'inline-block';
+            this.style.display = 'none'; // Hide the view button
+        });
+    
+        document.getElementById('close-allotted-courses-btn').addEventListener('click', function() {
+            const allottedCourseTable = document.getElementById('allotted-course-table');
+            const viewButton = document.getElementById('view-allotted-courses-btn');
+    
+            // Hide the allotted courses table and show the view button
+            allottedCourseTable.style.display = 'none';
+            this.style.display = 'none'; // Hide the close button
+            viewButton.style.display = 'inline-block'; // Show the view button
+        });
+    </script>    
+
+</body>
+</html>

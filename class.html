@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="class.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Add Class</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <i class="fas fa-rocket menu__icons fa-2x"></i>
+                <span class="appName">Teacher Dashboard</span>
+            </div>
+            <ul class="navbar__list">
+                <li class="navbar_item"><a href="teacher_dashboard.html" class="navbar_link">Home</a></li>
+                <li class="navbar_item"><a href="#addresources" class="navbar_link">Add resources</a></li>
+                <li class="navbar_item"><a href="class.html" class="navbar_link active">Add class</a></li>
+                <li class="navbar_item"><a href="teacher_timetable.html" class="navbar_link">Timetable</a></li>
+            </ul>
+            <div class="menu">
+                <div class="userInfo">
+                    <span class="userInfo__name">John Doe</span>
+                    <span class="userInfo__role">Teacher</span>
+                </div>
+                <img class="menu__avatar" src="https://ui-avatars.com/api/?name=John+Doe&size=50" alt="Placeholder Avatar">
+                <i class="fas fa-bell menu__icons fa-2x"></i>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <main id="addClassForm" class="card">
+            <div class="card__header">
+                <h2>Add New Class</h2>
+            </div>
+            <form id="classForm">
+                <div class="form__group">
+                    <label for="class_name">Class Name</label>
+                    <input type="text" id="class_name" name="class_name" placeholder="Enter class name" required>
+                </div>
+                <div class="form__group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="Enter subject" required>
+                </div>
+                <div class="form__group">
+                    <label for="group">Group</label>
+                    <input type="text" id="group" name="group" placeholder="Enter group" required>
+                </div>
+                <div class="form__group">
+                    <label for="timing">Timing</label>
+                    <input type="time" id="timing" name="timing" required>
+                </div>
+                <div class="form__group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="Enter location" required>
+                </div>
+                <div class="form__group">
+                    <button type="submit" class="btn">Add Class</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script src="teacher.js"></script>
+</body>
+</html>
+
+-------------------------------------------------------
+

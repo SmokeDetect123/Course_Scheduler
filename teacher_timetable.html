@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="teacher.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Timetable</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <i class="fas fa-rocket menu__icons fa-2x"></i>
+                <span class="appName">Teacher Dashboard</span>
+            </div>
+            <ul class="navbar__list">
+                <li class="navbar_item"><a href="teacher_dashboard.html" class="navbar_link">Home</a></li>
+                <li class="navbar_item"><a href="#addresources" class="navbar_link">Add resources</a></li>
+                <li class="navbar_item"><a href="class.html" class="navbar_link">Add class</a></li>
+                <li class="navbar_item"><a href="timetable.html" class="navbar_link active">Timetable</a></li>
+            </ul>
+            <div class="menu">
+                <div class="userInfo">
+                    <span class="userInfo__name">John Doe</span>
+                    <span class="userInfo__role">Teacher</span>
+                </div>
+                <img class="menu__avatar" src="https://ui-avatars.com/api/?name=John+Doe&size=50" alt="Placeholder Avatar">
+                <i class="fas fa-bell menu__icons fa-2x"></i>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <main id="timetable">
+            <div class="timetable__header">
+                <h2>Class Timetable</h2>
+            </div>
+            <table class="timetable__table">
+                <thead>
+                    <tr>
+                        <th>Class Name</th>
+                        <th>Subject</th>
+                        <th>Group</th>
+                        <th>Timing</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody id="timetableBody">
+                    <!-- Dynamic content will be inserted here -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <script src="Tr_timeTable.js"></script>
+</body>
+</html>
